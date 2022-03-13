@@ -1,0 +1,32 @@
+﻿@model List<Contact>
+@{
+    ViewData["Title"] = "All Contacts";
+}
+<h3 class="text-success">@ViewData["Title"] </h3>
+<div class="card-body">
+    <table class="table table-hover table-responsive text-nowrap">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Full Name</th>
+                <th>Email Address</th>
+                <th>Phone Number</th>
+                <th>Physical Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="GetSingle" asp-route-id="@item.Id">@item.Id</a>
+                    </td>
+                    <td>@item.FullName</td>
+                    <td>@item.EmailAddress</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.PhysicalAddress</td>
+                </tr>
+             }
+        </tbody>
+    </table>
+</div>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AddressBook.Infrastructure.MappingHelpers
 {
-    public static class MapperExtension
+    public static partial class MapperExtension
     {
         public static TDestination MapTo<TDestination>(object mappable)
         {

@@ -1,0 +1,38 @@
+﻿@model Contact
+@{
+    ViewData["Title"] = $" {Model.FullName}'s page ";
+}
+<h4 class="text-success">@ViewData["Title"]</h4>
+<br>
+<dl class="row">
+    <dt class="col">FullName</dt>
+    <dd class="col">@Model.FullName</dd>
+</dl>
+<dl class="row">
+    <dt class="col">Email Address</dt>
+    <dd class="col">@Model.EmailAddress</dd>
+</dl>
+<dl class="row">
+    <dt class="col">Phone Number</dt>
+    <dd class="col">@Model.PhoneNumber</dd>
+</dl>
+<dl class="row">
+    <dt class="col">Physical Address</dt>
+    <dd class="col">@Model.PhysicalAddress</dd>
+</dl>
+<div class="col-md-2">
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="text-danger">Delete</a>
+</div>
+@{
+    var currentContact = new Dictionary<string, string>
+    {
+                { "Id", $"{Model.Id}" },
+                { "FullName", $"{Model.FullName}" },
+                { "EmailAddress", $"{Model.EmailAddress}" },
+                { "PhoneNumber", $"{Model.PhoneNumber}" },
+                { "PhysicalAddress", $"{Model.PhysicalAddress}" },
+    };
+}
+<div class="col-md-2">
+    <a asp-action="Edit" asp-all-route-data="currentContact" class="text-success"> Edit</a>
+</div>

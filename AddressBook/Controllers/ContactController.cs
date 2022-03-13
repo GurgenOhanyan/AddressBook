@@ -19,6 +19,7 @@ namespace AddressBook.Controllers
         {
             return View();
         }
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var task = _contactFactory.GetAll();
@@ -26,36 +27,51 @@ namespace AddressBook.Controllers
 
             return View(contacts);
         }
-        public async Task<IActionResult> GetSingle(string email)
+        [HttpGet]
+        public async Task<IActionResult> GetSingle(int id)
         {
-            var task = _contactFactory.GetSingle(email);
+            var task = _contactFactory.GetSingle(id);
             var contact = await task;
 
             return View(contact);
         }
+        [HttpGet]
+        public ViewResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
         public async Task<IActionResult> Create(Contact contact)
         {
             if (ModelState.IsValid)
             {
                 await _contactFactory.Create(contact);
             }
-            return Ok();
+            return RedirectToAction("GetAll");
         }
-        public async Task<IActionResult> Edit(Contact contact)
+        [HttpGet]
+        public IActionResult Edit(Contact contact)
+        {
+            return View(contact);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditPost(Contact contact)
         {
             if (ModelState.IsValid)
             {
                 await _contactFactory.Update(contact);
             }
-            return Ok();
+            return RedirectToAction("GetAll");
         }
-        public async Task<IActionResult> Delete(Contact contact)
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
         {
             if (ModelState.IsValid)
             {
-                await _contactFactory.Delete(contact);
+                await _contactFactory.Delete(id);
             }
-            return Ok();
+            return RedirectToAction("GetAll");
         }
     }
 }

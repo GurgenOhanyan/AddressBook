@@ -2,7 +2,7 @@
 
 namespace AddressBook.Persistance.Migrations
 {
-    public partial class _initialDb : Migration
+    public partial class InitialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,15 +10,16 @@ namespace AddressBook.Persistance.Migrations
                 name: "Contacts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    EmailAddress = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhysicalAddress = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true)
+                    PhysicalAddress = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Contacts", x => new { x.EmailAddress, x.Id });
+                    table.PrimaryKey("PK_Contacts", x => x.Id);
                 });
         }
 

@@ -11,8 +11,8 @@ namespace AddressBook.Application.Services
     {
         Task Create(Contact contact);
         Task<List<Contact>> GetAll();
-        Task<Contact> GetSingle(string email);
+        Task<Contact> GetSingle(int Id);
         Task EditContact(Contact contact);
-        Task DeleteContact(Contact contact);
+        Task DeleteContact(int Id);
     }
 }

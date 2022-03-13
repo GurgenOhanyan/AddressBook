@@ -1,0 +1,38 @@
+﻿@model Contact
+@{
+    ViewData["Title"] = "Edit";
+}
+<h4 class="text-success">Edit</h4>
+<div class="row">
+    <div class="col-md-9">
+        <form asp-action="EditPost" method="post">
+
+            <div class="form-group">
+                <input type="hidden" asp-for="Id" value="@Model.Id">
+            </div>
+            <div class="form-group">
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" class="form-control" value="@Model.FullName" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailAddress" class="control-label"></label>
+                <input asp-for="EmailAddress" class="form-control" type="email" value="@Model.EmailAddress" />
+                <span asp-validation-for="EmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" value="@Model.PhoneNumber" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhysicalAddress" class="control-label"></label>
+                <input asp-for="PhysicalAddress" class="form-control" value="@Model.PhysicalAddress" />
+                <span asp-validation-for="PhysicalAddress" class="text-danger"></span>
+            </div>
+            <div>
+                <button class="text-success">Edit</button>
+            </div>
+        </form>
+    </div>
+</div>

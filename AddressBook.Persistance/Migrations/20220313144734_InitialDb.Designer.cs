@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AddressBook.Persistance.Migrations
 {
     [DbContext(typeof(AddressBookContext))]
-    [Migration("20220312171202__initialDb")]
-    partial class _initialDb
+    [Migration("20220313144734_InitialDb")]
+    partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,11 +22,14 @@ namespace AddressBook.Persistance.Migrations
 
             modelBuilder.Entity("AddressBook.Domain.Entities.Contact", b =>
                 {
-                    b.Property<string>("EmailAddress")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("EmailAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
                         .IsRequired()
@@ -37,10 +40,10 @@ namespace AddressBook.Persistance.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhysicalAddress")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
-                    b.HasKey("EmailAddress", "Id");
+                    b.HasKey("Id");
 
                     b.ToTable("Contacts");
                 });

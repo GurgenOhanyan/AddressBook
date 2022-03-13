@@ -11,8 +11,8 @@ namespace AddressBook.Infrastructure.Services
 {
     public class ContactService : IContactService
     {
-        private IRepository<Contact, string> _repository;
-        public ContactService(IRepository<Contact, string> repository)
+        private IRepository<Contact, int> _repository;
+        public ContactService(IRepository<Contact, int> repository)
         {
             _repository = repository;
         }
@@ -23,10 +23,9 @@ namespace AddressBook.Infrastructure.Services
             await _repository.CreateAsync(domainContact);
         }
 
-        public async Task DeleteContact(Application.ApplicationModels.Contact appContact)
+        public async Task DeleteContact(int Id)
         {
-            var domainModel = MappingHelpers.MapperExtension.MapTo<Contact>(appContact);
-            await _repository.DeleteAsync(domainModel);
+            await _repository.DeleteAsync(Id);
         }
 
         public async Task EditContact(Application.ApplicationModels.Contact appContact)
@@ -44,9 +43,9 @@ namespace AddressBook.Infrastructure.Services
             return appContacts;
         }
 
-        public async Task<Application.ApplicationModels.Contact> GetSingle(string email)
+        public async Task<Application.ApplicationModels.Contact> GetSingle(int Id)
         {
-            var task = _repository.ReadByEmailAsync(email);
+            var task = _repository.ReadByIdAsync(Id);
             var domainContact = await task;
             var appContact = MappingHelpers.MapperExtension.MapTo<Application.ApplicationModels.Contact>(domainContact);
             return appContact;

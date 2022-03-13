@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AddressBook.Infrastructure.Repositories
 {
-    public class ContactRepository : IRepository<Contact, string>
+    public class ContactRepository : IRepository<Contact, int>
     {
         private AddressBookContext _bookContext;
         public ContactRepository(AddressBookContext bookContext)
@@ -24,9 +24,9 @@ namespace AddressBook.Infrastructure.Repositories
             await _bookContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Contact entity)
+        public async Task DeleteAsync(int Id)
         {
-            _bookContext.Contacts.Remove(entity);
+            _bookContext.Contacts.Remove(_bookContext.Contacts.Find(Id));
             await _bookContext.SaveChangesAsync();
         }
 
@@ -36,16 +36,21 @@ namespace AddressBook.Infrastructure.Repositories
             var allContacts = await task;
             return allContacts;
         }
-        public async Task<Contact> ReadByEmailAsync(string email)
+        public async Task<Contact> ReadByIdAsync(int Id)
         {
-            var task = _bookContext.Contacts.Where(m => m.EmailAddress == email).FirstOrDefaultAsync();
+            var task = _bookContext.Contacts.Where(m => m.Id == Id).FirstOrDefaultAsync();
             var contact = await task;
             return contact;
         }
 
         public async Task UpdateAsync(Contact entity)
         {
-            _bookContext.Contacts.Update(entity);
+
+            var contact = _bookContext.Contacts.FirstOrDefault(c => c.Id == entity.Id);
+            contact.EmailAddress = entity.EmailAddress;
+            contact.FullName = entity.FullName;
+            contact.PhoneNumber = entity.PhoneNumber;
+            contact.PhysicalAddress = entity.PhysicalAddress;
             await _bookContext.SaveChangesAsync();
         }
     }

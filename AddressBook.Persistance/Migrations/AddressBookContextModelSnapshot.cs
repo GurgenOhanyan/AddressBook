@@ -20,11 +20,14 @@ namespace AddressBook.Persistance.Migrations
 
             modelBuilder.Entity("AddressBook.Domain.Entities.Contact", b =>
                 {
-                    b.Property<string>("EmailAddress")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("EmailAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
                         .IsRequired()
@@ -35,10 +38,10 @@ namespace AddressBook.Persistance.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhysicalAddress")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
-                    b.HasKey("EmailAddress", "Id");
+                    b.HasKey("Id");
 
                     b.ToTable("Contacts");
                 });

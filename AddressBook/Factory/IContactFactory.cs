@@ -10,8 +10,8 @@ namespace AddressBook.Factory
     {
         Task Create(Contact contact);
         Task<List<Contact>> GetAll();
-        Task<Contact> GetSingle(string email);
+        Task<Contact> GetSingle(int Id);
         Task Update(Contact contact);
-        Task Delete(Contact contact);
+        Task Delete(int Id);
     }
 }

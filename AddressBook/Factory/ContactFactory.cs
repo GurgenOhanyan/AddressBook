@@ -20,9 +20,9 @@ namespace AddressBook.Factory
             await _contactService.Create(MapperExtension.MapTo<Application.ApplicationModels.Contact>(contact));
         }
 
-        public async Task Delete(Contact contact)
+        public async Task Delete(int Id)
         {
-            await _contactService.DeleteContact(MapperExtension.MapTo<Application.ApplicationModels.Contact>(contact));
+            await _contactService.DeleteContact(Id);
         }
 
         public async Task<List<Contact>> GetAll()
@@ -33,9 +33,9 @@ namespace AddressBook.Factory
             return contacts;
         }
 
-        public async Task<Contact> GetSingle(string email)
+        public async Task<Contact> GetSingle(int Id)
         {
-            var task = _contactService.GetSingle(email);
+            var task = _contactService.GetSingle(Id);
             var appContact = await task;
             var contact = MapperExtension.MapTo<Contact>(appContact);
             return contact;

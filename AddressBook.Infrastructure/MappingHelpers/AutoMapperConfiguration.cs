@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace AddressBook.Infrastructure.MappingHelpers
 {
-    public static class AutoMapperConfiguration
+    public static partial class AutoMapperConfiguration
     {
         private static Mapper _mapper;
         public static Mapper CreateInstance()
@@ -22,8 +21,8 @@ namespace AddressBook.Infrastructure.MappingHelpers
         {
             var config = new MapperConfiguration(config =>
             {
-                config.CreateMap<Application.ApplicationModels.Contact,Domain.Entities.Contact>();
-                config.CreateMap<Domain.Entities.Contact,Application.ApplicationModels.Contact>();
+                config.CreateMap<Application.ApplicationModels.Contact, Domain.Entities.Contact>();
+                config.CreateMap<Domain.Entities.Contact, Application.ApplicationModels.Contact>();
             });
             _mapper = new Mapper(config);
         }

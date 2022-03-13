@@ -1,3 +1,9 @@
+using AddressBook.Application.Repositories;
+using AddressBook.Application.Services;
+using AddressBook.Factory;
+using AddressBook.Infrastructure.Repositories;
+using AddressBook.Infrastructure.Services;
+using AddressBook.Persistance;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +30,9 @@ namespace AddressBook
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddTransient<IContactFactory, ContactFactory>();
+            services.AddScoped<IContactService, ContactService>();
+            services.AddSingleton<IRepository<Domain.Entities.Contact, int>>(new ContactRepository(new AddressBookContext()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +59,7 @@ namespace AddressBook
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Contact}/{action=GetAll}");
             });
         }
     }

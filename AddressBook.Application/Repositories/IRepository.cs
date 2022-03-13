@@ -9,9 +9,9 @@ namespace AddressBook.Application.Repositories
     public interface IRepository<TEntity, TIdentity>
     {
         Task<List<TEntity>> ReadAllAsync();
-        Task<TEntity> ReadByEmailAsync(TIdentity email);
+        Task<TEntity> ReadByIdAsync(TIdentity Id);
         Task CreateAsync(TEntity entity);
         Task UpdateAsync(TEntity entity);
-        Task DeleteAsync(TEntity entity);
+        Task DeleteAsync(TIdentity entity);
     }
 }

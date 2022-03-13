@@ -13,7 +13,7 @@ namespace AddressBook.Persistance
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var configBuilder = new ConfigurationBuilder()
-                 .SetBasePath(Directory.GetCurrentDirectory())
+                 .SetBasePath(@"C:\Users\User\source\repos\AddressBook\AddressBook.Persistance")
                  .AddJsonFile("appsettings.json")
                  .Build();
 
@@ -26,9 +26,7 @@ namespace AddressBook.Persistance
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Contact>()
-               .HasKey(k => new { k.EmailAddress, k.Id });
-            modelBuilder.Entity<Contact>()
-                .Property(p => p.PhysicalAddress).HasMaxLength(15);
+                .Property(p => p.PhysicalAddress).HasMaxLength(40);
         }
     }
 }
