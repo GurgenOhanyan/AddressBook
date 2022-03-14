@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AddressBook.Factory.MappingHelpers
 {
-    public class AutoMapperConfig
+    public static class AutoMapperConfig
     {
         private static Mapper _mapper;
         public static Mapper CreateInstance()

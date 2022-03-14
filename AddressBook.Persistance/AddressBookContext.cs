@@ -13,7 +13,8 @@ namespace AddressBook.Persistance
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var configBuilder = new ConfigurationBuilder()
-                 .SetBasePath(@"C:\Users\User\source\repos\AddressBook\AddressBook.Persistance")
+                 //.SetBasePath(@"C:\Users\User\source\repos\AddressBook\AddressBook.Persistance")
+                 .SetBasePath(@"C:\Users\Gurgen\Source\Repos\GurgenOhanyan\AddressBook\AddressBook.Persistance")
                  .AddJsonFile("appsettings.json")
                  .Build();
 
